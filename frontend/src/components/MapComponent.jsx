@@ -22,31 +22,31 @@ const MapComponent = ({ initialPosition, onPositionChange }) => {
     onPositionChange(newPosition);
   };
 
-  if (!isLoaded) return <div>Loading...</div>;
+  if (!isLoaded) return <div className="text-center py-4 text-gray-600">Loading...</div>;
 
   return (
     <>
-    <GoogleMap
-      mapContainerStyle={containerStyle}
-      center={position}
-      zoom={14}
-      onClick={(e) => {
-        const newPosition = {
-          lat: e.latLng.lat(),
-          lng: e.latLng.lng(),
-        };
-        setPosition(newPosition); 
-        onPositionChange(newPosition); 
-      }}
-    >
-      <Marker position={position} draggable onDragEnd={handleDragEnd} />
-    </GoogleMap>
-     <div className="mt-2 text-sm text-gray-600">
-     Latitude: {position.lat.toFixed(6)}, Longitude: {position.lng.toFixed(6)}
-   </div>
- 
- </>
+      <GoogleMap
+        mapContainerStyle={containerStyle}
+        center={position}
+        zoom={14}
+        onClick={(e) => {
+          const newPosition = {
+            lat: e.latLng.lat(),
+            lng: e.latLng.lng(),
+          };
+          setPosition(newPosition);
+          onPositionChange(newPosition);
+        }}
+      >
+        <Marker position={position} draggable onDragEnd={handleDragEnd} />
+      </GoogleMap>
+      <div className="mt-2 text-sm text-gray-600 bg-gray-100 p-2 rounded-md">
+        Latitude: {position.lat.toFixed(6)}, Longitude: {position.lng.toFixed(6)} (Click anywhere to select that location)
+      </div>
+    </>
   );
 };
 
 export default MapComponent;
+

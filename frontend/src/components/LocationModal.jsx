@@ -1,7 +1,7 @@
-import React from "react"
+import React from "react";
 
 const LocationModal = ({ open, onClose, onEnableLocation, onSearchManually }) => {
-  if (!open) return null
+  if (!open) return null;
 
   return (
     <div
@@ -9,30 +9,28 @@ const LocationModal = ({ open, onClose, onEnableLocation, onSearchManually }) =>
       onClick={onClose}
     >
       <div
-        className="bg-white rounded-3xl shadow-xl p-6 w-full max-w-sm text-center"
+        className="bg-white rounded-3xl shadow-xl p-8 w-full max-w-sm text-center"
         onClick={(e) => e.stopPropagation()}
       >
-  
-        <h2 className="text-xl font-bold mb-2">Location permission is off</h2>
-      
-        <div className="space-y-3">
+        <h2 className="text-2xl font-bold mb-4 text-red-700">Location permission is off</h2>
+        <div className="space-y-4">
           <button
             onClick={onEnableLocation}
-            className="w-full bg-red-500 hover:bg-red-600 text-white py-3 px-4 rounded-full font-medium transition-colors"
+            className="w-full bg-red-500 hover:bg-red-600 text-white py-3 px-6 rounded-full font-medium transition-colors"
           >
             Enable Location
           </button>
           <button
             onClick={onSearchManually}
-            className="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 py-3 px-4 rounded-full font-medium transition-colors flex items-center justify-center gap-2"
+            className="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 py-3 px-6 rounded-full font-medium transition-colors flex items-center justify-center gap-2"
           >
             Search your Location Manually
           </button>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default LocationModal
+export default LocationModal;
 

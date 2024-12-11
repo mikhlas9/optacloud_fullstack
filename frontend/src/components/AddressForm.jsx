@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Home, Briefcase, Users, MapPin } from 'lucide-react';
 
 const AddressForm = ({ onSaveAddress }) => {
   const [formData, setFormData] = useState({
@@ -7,6 +8,13 @@ const AddressForm = ({ onSaveAddress }) => {
     category: "Home",
   });
 
+  const categories = [
+    { id: "Home", icon: Home },
+    { id: "Office", icon: Briefcase },
+    { id: "Friends & Family", icon: Users },
+    { id: "Other", icon: MapPin },
+  ];
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -14,12 +22,19 @@ const AddressForm = ({ onSaveAddress }) => {
     });
   };
 
+  const handleCategorySelect = (category) => {
+    setFormData({
+      ...formData,
+      category,
+    });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (!formData.houseNumber.trim() || !formData.roadArea.trim()) {
-        alert("Please fill out all fields.");
-        return;
+      alert("Please fill out all fields.");
+      return;
     }
 
     onSaveAddress(formData);
@@ -31,12 +46,9 @@ const AddressForm = ({ onSaveAddress }) => {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
-    >
-      <h2 className="text-xl font-bold mb-4">Delivery Address Form</h2>
-      <div className="mb-4">
+    <form onSubmit={handleSubmit} className="space-y-6">
+      <h2 className="text-xl font-bold mb-4 text-red-700">Delivery Address Form</h2>
+      <div>
         <label
           className="block text-gray-700 text-sm font-bold mb-2"
           htmlFor="houseNumber"
@@ -50,11 +62,11 @@ const AddressForm = ({ onSaveAddress }) => {
           value={formData.houseNumber}
           onChange={handleChange}
           placeholder="Enter your house number"
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          className="shadow-sm appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-red-500"
           required
         />
       </div>
-      <div className="mb-4">
+      <div>
         <label
           className="block text-gray-700 text-sm font-bold mb-2"
           htmlFor="roadArea"
@@ -68,32 +80,35 @@ const AddressForm = ({ onSaveAddress }) => {
           value={formData.roadArea}
           onChange={handleChange}
           placeholder="Enter your road/area"
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          className="shadow-sm appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-red-500"
           required
         />
       </div>
-      <div className="mb-4">
-        <label
-          className="block text-gray-700 text-sm font-bold mb-2"
-          htmlFor="category"
-        >
+      <div>
+        <label className="block text-gray-900 text-sm font-semibold mb-2">
           Save As
         </label>
-        <select
-          name="category"
-          id="category"
-          value={formData.category}
-          onChange={handleChange}
-          className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
-        >
-          <option value="Home">Home</option>
-          <option value="Office">Office</option>
-          <option value="Friends & Family">Friends & Family</option>
-        </select>
+        <div className="flex gap-3">
+          {categories.map(({ id, icon: Icon }) => (
+            <button
+              key={id}
+              type="button"
+              onClick={() => handleCategorySelect(id)}
+              className={`flex flex-col items-center p-2 rounded-full transition-all ${
+                formData.category === id
+                  ? "bg-red-500 text-white"
+                  : "bg-gray-50 text-gray-600 hover:bg-gray-100"
+              }`}
+            >
+              <Icon className="w-4 h-4" />
+              <span className="text-[10px] mt-0.5 font-medium">{id}</span>
+            </button>
+          ))}
+        </div>
       </div>
       <button
         type="submit"
-        className="bg-blue-500 text-white px-4 py-2 rounded shadow hover:bg-blue-600"
+        className="w-full bg-red-500 hover:bg-red-600 text-white py-3 px-4 rounded-full font-medium transition-colors shadow-md"
       >
         Save Address
       </button>
@@ -102,3 +117,4 @@ const AddressForm = ({ onSaveAddress }) => {
 };
 
 export default AddressForm;
+

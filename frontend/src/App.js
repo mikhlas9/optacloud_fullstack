@@ -96,38 +96,36 @@ const App = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100">
- 
+    <div className="min-h-screen bg-gray-50">
       <div className="container mx-auto py-8 px-4">
-        <div className="bg-white shadow-md rounded-lg overflow-hidden mb-8">
-          <h1 className="text-3xl font-bold text-center py-6 bg-blue-600 text-white">
+        <div className="bg-white shadow-lg rounded-lg overflow-hidden mb-8">
+          <h1 className="text-3xl font-bold text-center py-6 bg-red-600 text-white">
             Location Flow App
           </h1>
           <LocationModal
-        open={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        onEnableLocation={handleEnableLocation}
-        onSearchManually={handleSearchManually}
-      />
+            open={isModalOpen}
+            onClose={() => setIsModalOpen(false)}
+            onEnableLocation={handleEnableLocation}
+            onSearchManually={handleSearchManually}
+          />
           <div className="p-6">
             <MapComponent
               initialPosition={userPosition}
               onPositionChange={handlePositionChange}
             />
-       
           </div>
         </div>
 
         <div className="grid gap-8 md:grid-cols-2">
-          <div className="bg-white shadow-md rounded-lg overflow-hidden">
-            <h2 className="text-xl font-semibold p-4 bg-gray-100">Add New Address</h2>
+          <div className="bg-white shadow-lg rounded-lg overflow-hidden">
+            <h2 className="text-xl font-semibold p-4 bg-red-100 text-red-800">Add New Address</h2>
             <div className="p-6">
               <AddressForm onSaveAddress={handleSaveAddress} />
             </div>
           </div>
 
-          <div className="bg-white shadow-md rounded-lg overflow-hidden">
-            <h2 className="text-xl font-semibold p-4 bg-gray-100">Manage Addresses</h2>
+          <div className="bg-white shadow-lg rounded-lg overflow-hidden">
+            <h2 className="text-xl font-semibold p-4 bg-red-100 text-red-800">Manage Addresses</h2>
             <div className="p-6">
               <ManageAddresses
                 savedAddresses={savedAddresses}
@@ -139,8 +137,7 @@ const App = () => {
         </div>
       </div>
     </div>
-  )
-}
-
+  );
+};
 
 export default App;

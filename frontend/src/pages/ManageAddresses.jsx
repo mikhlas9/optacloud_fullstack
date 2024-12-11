@@ -25,7 +25,7 @@ const ManageAddresses = ({ savedAddresses, onUpdateAddress, onDeleteAddress }) =
   };
 
   return (
-    <div className="container mx-auto py-8">
+    <div className="container mx-auto py-4">
       {savedAddresses.length === 0 ? (
         <p className="text-gray-600 text-center">No addresses saved yet.</p>
       ) : (
@@ -33,13 +33,16 @@ const ManageAddresses = ({ savedAddresses, onUpdateAddress, onDeleteAddress }) =
           {savedAddresses.map((address, index) => (
             <li
               key={index}
-              className={`p-4 bg-white shadow rounded ${selectedAddress === index ? "border-2 border-blue-500" : ""
-                }`}
+              className={`p-4 bg-white shadow-md rounded-lg ${
+                selectedAddress === index ? "border-2 border-red-500" : ""
+              }`}
             >
-              <div className="flex justify-between items-center">
-                <div>
-                  <strong>{address.category}:</strong> {address.houseNumber},{" "}
-                  {address.roadArea}
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center">
+                <div className="mb-2 sm:mb-0">
+                  <strong className="text-red-700">{address.category}:</strong>{" "}
+                  <span className="text-gray-800">
+                    {address.houseNumber}, {address.roadArea}
+                  </span>
                   <br />
                   <span className="text-gray-600 text-sm">
                     (Lat: {address.coordinates.lat.toFixed(4)}, Lng:{" "}
@@ -51,22 +54,21 @@ const ManageAddresses = ({ savedAddresses, onUpdateAddress, onDeleteAddress }) =
                     </span>
                   )}
                 </div>
-                <div className="flex space-x-2">
+                <div className="flex flex-wrap gap-2 mt-2 sm:mt-0">
                   <button
-                    className="bg-yellow-500 text-white px-3 py-1 rounded shadow hover:bg-yellow-600"
+                    className="bg-yellow-500 text-white px-3 py-1 rounded-full text-sm font-medium shadow hover:bg-yellow-600 transition-colors"
                     onClick={() => handleFavorite(index)}
                   >
                     {address.isFavorite ? "Unfavorite" : "Favorite"}
                   </button>
-                
                   <button
-                    className="bg-red-500 text-white px-3 py-1 rounded shadow hover:bg-red-600"
+                    className="bg-red-500 text-white px-3 py-1 rounded-full text-sm font-medium shadow hover:bg-red-600 transition-colors"
                     onClick={() => handleDelete(index)}
                   >
                     Delete
                   </button>
                   <button
-                    className="bg-green-500 text-white px-3 py-1 rounded shadow hover:bg-green-600"
+                    className="bg-green-500 text-white px-3 py-1 rounded-full text-sm font-medium shadow hover:bg-green-600 transition-colors"
                     onClick={() => handleMapPreview(address.coordinates)}
                   >
                     Map Preview
@@ -81,5 +83,5 @@ const ManageAddresses = ({ savedAddresses, onUpdateAddress, onDeleteAddress }) =
   );
 };
 
-
 export default ManageAddresses;
+
